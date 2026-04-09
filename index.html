@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Urban Grind Café - Your Cozy Coffee Corner in Rivonia</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        /* --- CSS VARIABLES --- */
+        /* --- CSS VARIABLES --- (Modern & Easy to Theme) */
         :root {
-            --primary-color: #5d4037;
+            --primary-color: #5d4037; /* Deep, rich coffee brown */
             --primary-light: #8d6e63;
-            --accent-color: #a1887f;
-            --bg-color: #fffaf0;
-            --text-color: #2e1a0d;
+            --accent-color: #a1887f; /* Lighter latte brown */
+            --bg-color: #fffaf0;    /* Warm, light cream */
+            --text-color: #2e1a0d; /* Dark espresso brown */
             --text-light: #fff;
-            --whatsapp-green: #25D366;
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Poppins', sans-serif;
             --transition-speed: 0.3s;
@@ -33,6 +30,7 @@
         }
 
         html {
+            scroll-behavior: smooth; /* Smooth scrolling for single page */
             font-size: 16px;
         }
 
@@ -55,7 +53,9 @@
             transition: color var(--transition-speed);
         }
 
-        ul { list-style: none; }
+        ul {
+            list-style: none;
+        }
 
         img {
             max-width: 100%;
@@ -70,10 +70,7 @@
         }
 
         section {
-            padding: 100px 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+            padding: 100px 0; /* Clear section separation */
         }
 
         .section-title {
@@ -83,24 +80,22 @@
             margin-bottom: 3rem;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes ring {
-            0% { transform: rotate(0); }
-            10% { transform: rotate(15deg); }
-            20% { transform: rotate(-15deg); }
-            30% { transform: rotate(15deg); }
-            40% { transform: rotate(-15deg); }
-            50% { transform: rotate(0); }
-            100% { transform: rotate(0); }
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
         }
 
-        @keyframes popUp {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .btn:hover {
+            background-color: var(--primary-light);
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION --- (Desktop & Mobile-Ready) */
         header {
             background-color: var(--primary-color);
             color: var(--text-light);
@@ -127,37 +122,27 @@
             font-weight: bold;
         }
 
-        .logo span { color: var(--accent-color); }
+        .logo span {
+            color: var(--accent-color);
+        }
 
         .nav-links {
             display: flex;
-            align-items: center;
             gap: 30px;
         }
 
-        .nav-links a:hover { color: var(--accent-color); }
-
-        .phone-ring-btn {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            transition: background 0.3s;
+        .nav-links a:hover {
+            color: var(--accent-color);
         }
 
-        .phone-ring-btn i {
-            animation: ring 2s infinite ease-in-out;
+        .order-btn-nav {
+            background-color: var(--text-light);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 4px;
         }
 
-        .phone-ring-btn:hover {
-            background: var(--accent-color);
-        }
-
+        /* Hamburger (Initial state: hidden) */
         .hamburger {
             display: none;
             cursor: pointer;
@@ -173,44 +158,38 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION --- (Powerful & Welcoming) */
         #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            /* Placeholder: replace with a beautiful coffee shop interior image from Unsplash */
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=2000&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: var(--text-light);
-            text-align: center;
+            padding-top: var(--header-height); /* Offset for header */
         }
 
-        #hero h1 { font-size: 4rem; }
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
 
         #hero p {
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto 2.5rem;
+            opacity: 0.9;
         }
 
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--whatsapp-green);
-            color: white;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            animation: popUp 3s infinite;
-            font-size: 2rem;
+        /* --- ABOUT US --- (The Rivonia Story) */
+        #about {
+            background-color: var(--bg-color);
         }
 
-        .whatsapp-btn:hover {
-            background-color: #1ebe57;
-            transform: scale(1.1);
-        }
-
-        /* --- ABOUT US --- */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -224,29 +203,41 @@
             box-shadow: var(--shadow);
         }
 
-        /* --- MENU SECTION --- */
-        #menu { background-color: #f5f5f5; }
+        #about p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        #about h3 {
+            color: var(--primary-color);
+        }
+
+        /* --- MENU SECTION --- (Card-Flip & Core Product) */
+        #menu {
+            background-color: #f5f5f5; /* Subtle variation */
+        }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
 
+        /* CARD FLIP LOGIC */
         .card-container {
             perspective: 1000px;
             border-radius: 10px;
+            overflow: hidden;
         }
 
         .card {
             width: 100%;
-            height: 400px;
+            height: 400px; /* Fixed height for consistency */
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.6s;
             cursor: pointer;
             box-shadow: var(--shadow);
-            border-radius: 10px;
         }
 
         .card-container:hover .card, 
@@ -262,15 +253,17 @@
             display: flex;
             flex-direction: column;
             border-radius: 10px;
-            overflow: hidden;
         }
 
-        .card-front { background-color: white; }
+        .card-front {
+            background-color: white;
+        }
 
         .card-front img {
-            height: 70%;
+            height: 70%; /* Image takes top portion */
             width: 100%;
             object-fit: cover;
+            border-radius: 10px 10px 0 0;
         }
 
         .item-info-front {
@@ -279,7 +272,7 @@
             height: 30%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
         }
 
         .card-back {
@@ -287,41 +280,57 @@
             color: var(--text-light);
             transform: rotateY(180deg);
             padding: 30px;
-            text-align: center;
-            justify-content: center;
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .card-back h3 { color: var(--accent-color); }
+        .card-back h3 {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+        }
+
+        .card-back p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
 
         .back-details {
             display: flex;
             justify-content: space-between;
-            font-weight: 600;
-            margin-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 10px;
+            align-items: center;
+            margin-top: auto;
         }
 
-        /* --- CONTACT --- */
+        .prices p, .sizes p {
+            font-weight: 600;
+        }
+
+        /* --- CONTACT SECTION --- (Order Focus) */
         #contact {
             background-color: var(--accent-color);
             color: var(--text-light);
             text-align: center;
         }
 
-        .contact-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: var(--text-light);
-            color: var(--primary-color);
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-top: 20px;
+        #contact .section-title {
+            color: var(--text-light);
         }
 
-        /* --- FOOTER --- */
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        #contact .btn {
+            background-color: var(--text-light);
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            padding: 15px 40px;
+        }
+
+        /* --- FOOTER --- (Minimal & Clean) */
         footer {
             background-color: var(--primary-color);
             color: rgba(255,255,255,0.7);
@@ -329,50 +338,107 @@
             text-align: center;
         }
 
-        /* --- RESPONSIVE QUERIES --- */
-        @media screen and (max-width: 900px) {
-            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+        footer p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- (Crucial UX) */
+        
+        /* Mobile (Phones) */
         @media screen and (max-width: 768px) {
-            .hamburger { display: flex; }
+            :root {
+                --header-height: 60px;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            /* Hamburger Menu */
+            .hamburger {
+                display: flex;
+            }
+
             .nav-links {
                 position: absolute;
                 top: var(--header-height);
-                right: 0;
-                height: 100vh;
+                right: 0px;
+                height: calc(100vh - var(--header-height));
                 background-color: var(--primary-color);
                 width: 70%;
                 flex-direction: column;
+                align-items: center;
                 padding-top: 40px;
                 transform: translateX(100%);
-                transition: transform 0.3s ease;
+                transition: transform 0.3s ease-in-out;
+                gap: 30px;
+                box-shadow: -4px 0 6px rgba(0,0,0,0.1);
             }
-            .nav-links.active { transform: translateX(0); }
-            .about-content { grid-template-columns: 1fr; }
-            #hero h1 { font-size: 2.5rem; }
+
+            .nav-links.active {
+                transform: translateX(0%);
+            }
+
+            .order-btn-nav {
+                display: none; /* Hide on mobile navbar, user should use contact */
+            }
+
+            /* Hamburger animation */
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            /* Content Layouts */
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                height: 350px;
+            }
+
+            .item-info-front h3 {
+                font-size: 1.1rem;
+            }
         }
 
-        @media screen and (max-width: 600px) {
-            .menu-grid { grid-template-columns: 1fr; }
+        /* Small Laptops/Tablets */
+        @media screen and (max-width: 992px) {
+            #hero h1 {
+                font-size: 3rem;
+            }
         }
+
     </style>
 </head>
 <body>
 
     <header>
         <div class="container navbar">
-            <a href="#hero" class="logo" onclick="instantNav(event, 'hero')">URBAN GRIND <span>CAFÉ</span></a>
+            <a href="#hero" class="logo">URBAN GRIND <span>CAFÉ</span></a>
             <ul class="nav-links">
-                <li><a href="#hero" onclick="instantNav(event, 'hero')">Home</a></li>
-                <li><a href="#about" onclick="instantNav(event, 'about')">About</a></li>
-                <li><a href="#menu" onclick="instantNav(event, 'menu')">Menu</a></li>
-                <li><a href="#contact" onclick="instantNav(event, 'contact')">Contact</a></li>
-                <li>
-                    <a href="tel:0616235271" class="phone-ring-btn" title="Call Us">
-                        <i class="fas fa-phone"></i>
-                    </a>
-                </li>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:0616235271" class="order-btn-nav">Order Now: 061</a></li>
             </ul>
             <div class="hamburger">
                 <div class="bar"></div>
@@ -385,10 +451,8 @@
     <section id="hero">
         <div class="container">
             <h1>Your Rivonia Coffee Corner.</h1>
-            <p>Welcome to Urban Grind Café. Nestled in a cozy corner of Rivonia, we craft exceptional beverages that fuel your day.</p>
-            <a href="https://wa.me/27616235271?text=Hi%20Urban%20Grind!%20I'd%20like%20to%20order%20a%20drink." class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i>
-            </a>
+            <p>Welcome to Urban Grind Café. Nestled in a cozy corner of Rivonia, we craft exceptional coffee and hot beverages using the finest beans and a lot of heart. Fast service, friendly faces, and the perfect atmosphere to grind or unwind.</p>
+            <a href="#menu" class="btn">View Our Menu</a>
         </div>
     </section>
 
@@ -396,12 +460,12 @@
         <div class="container about-content">
             <div class="about-text">
                 <h2 class="section-title" style="text-align:left;">The Urban Grind Story</h2>
-                <p>Located in a tucked-away cozy corner in the heart of Rivonia, Urban Grind is a neighborhood haven for coffee lovers.</p>
-                <p>We believe in the authentic coffee house experience—from ethically sourced beans to the perfect micro-foam.</p>
-                <h3>Stop by, stay awhile.</h3>
+                <p>We are a community-driven café born from a passion for perfect roasts and genuine connections. Located in a tucked-away cozy corner in the heart of Rivonia, Urban Grind isn't just a coffee shop; it's a neighborhood haven.</p>
+                <p>We believe in the authentic coffee house experience—from the first rich aroma to the last satisfying sip. We source ethically and roast to perfection. Whether you need a quick pick-me-up or a peaceful spot to catch up, we have a seat for you.</p>
+                <h3>Stop by, stay awhile. We can't wait to serve you.</h3>
             </div>
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1000&auto=format&fit=crop" alt="Cozy Rivonia Cafe">
+                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1000&auto=format&fit=crop" alt="Cozy coffee shop corner in Rivonia">
             </div>
         </div>
     </section>
@@ -410,131 +474,268 @@
         <div class="container">
             <h2 class="section-title">Our Grind. Your Fuel.</h2>
             <div class="menu-grid">
+
                 <div class="card-container" onclick="toggleFlip(this)">
                     <div class="card">
                         <div class="card-face card-front">
                             <img src="The Spiced Cloud Latte.png" alt="The Spiced Cloud Latte">
-                            <div class="item-info-front"><h3>The Spiced Cloud Latte</h3><small>Tap for details</small></div>
+                            <div class="item-info-front">
+                                <h3>The Spiced Cloud Latte</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
                         </div>
                         <div class="card-face card-back">
                             <h3>The Spiced Cloud Latte</h3>
-                            <p>Vanilla and seasonal spices with cloud-like foam.</p>
-                            <div class="back-details"><span>S / M / L</span><span>R38 / R42 / R46</span></div>
+                            <p>An ethereal blend of vanilla and seasonal spices, topped with a velvety layer of cloud-like foam.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>S / M / L</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R38 / R42 / R46</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-container" onclick="toggleFlip(this)">
                     <div class="card">
                         <div class="card-face card-front">
-                            <img src="Artisanal Spiced Hot Chocolate.png" alt="Hot Chocolate">
-                            <div class="item-info-front"><h3>Artisanal Hot Chocolate</h3><small>Tap for details</small></div>
+                            <img src="Artisanal Spiced Hot Chocolate.png" alt="Artisanal Spiced Hot Chocolate">
+                            <div class="item-info-front">
+                                <h3>Artisanal Spiced Hot Chocolate</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
                         </div>
                         <div class="card-face card-back">
-                            <h3>Artisanal Hot Chocolate</h3>
-                            <p>Rich Belgian chocolate with five warming spices.</p>
-                            <div class="back-details"><span>S / L</span><span>R45 / R55</span></div>
+                            <h3>Artisanal Spiced Hot Chocolate</h3>
+                            <p>Rich, melted Belgian chocolate infused with a secret blend of five warming spices.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>S / L</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R45 / R55</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-container" onclick="toggleFlip(this)">
                     <div class="card">
                         <div class="card-face card-front">
-                            <img src="The Hibiscus Iced Tea.png" alt="Iced Tea">
-                            <div class="item-info-front"><h3>Hibiscus Iced Tea</h3><small>Tap for details</small></div>
+                            <img src="The Hibiscus Iced Tea.png" alt="The Hibiscus Iced Tea">
+                            <div class="item-info-front">
+                                <h3>The Hibiscus Iced Tea</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
                         </div>
                         <div class="card-face card-back">
-                            <h3>Hibiscus Iced Tea</h3>
-                            <p>Vibrant brew of hibiscus petals and forest berries.</p>
-                            <div class="back-details"><span>Standard</span><span>R35</span></div>
+                            <h3>The Hibiscus Iced Tea</h3>
+                            <p>A refreshing, vibrant brew of hibiscus petals and forest berries, served chilled.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>Standard</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R35</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-container" onclick="toggleFlip(this)">
                     <div class="card">
                         <div class="card-face card-front">
-                            <img src="The Standard Cuppacino.png" alt="Cuppacino">
-                            <div class="item-info-front"><h3>Standard Cuppacino</h3><small>Tap for details</small></div>
+                            <img src="The Standard Cuppacino.png" alt="The Standard Cuppacino">
+                            <div class="item-info-front">
+                                <h3>The Standard Cuppacino</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
                         </div>
                         <div class="card-face card-back">
-                            <h3>Standard Cuppacino</h3>
-                            <p>Classic 1:1 ratio of espresso, milk, and foam.</p>
-                            <div class="back-details"><span>S / M / L</span><span>R32 / R36 / R40</span></div>
+                            <h3>The Standard Cuppacino</h3>
+                            <p>Classic 1:1 ratio of espresso, steamed milk, and milk foam. Simple perfection.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>S / M / L</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R32 / R36 / R40</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-container" onclick="toggleFlip(this)">
                     <div class="card">
                         <div class="card-face card-front">
-                            <img src="The Iced foam Latte.png" alt="Iced Latte">
-                            <div class="item-info-front"><h3>Iced Foam Latte</h3><small>Tap for details</small></div>
+                            <img src="The Iced foam Latte.png" alt="The Iced foam Latte">
+                            <div class="item-info-front">
+                                <h3>The Iced foam Latte</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
                         </div>
                         <div class="card-face card-back">
-                            <h3>Iced Foam Latte</h3>
-                            <p>Espresso over ice with a cold milk foam head.</p>
-                            <div class="back-details"><span>S / L</span><span>R38 / R48</span></div>
+                            <h3>The Iced foam Latte</h3>
+                            <p>Classic espresso over ice, finished with a generous head of cold milk foam.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>S / L</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R38 / R48</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-container" onclick="toggleFlip(this)">
                     <div class="card">
                         <div class="card-face card-front">
-                            <img src="The Spiced Cinnamon Chai.png" alt="Chai">
-                            <div class="item-info-front"><h3>Spiced Cinnamon Chai</h3><small>Tap for details</small></div>
+                            <img src="The Spiced Cinnamon Chai.png" alt="The Spiced Cinnamon Chai">
+                            <div class="item-info-front">
+                                <h3>The Spiced Cinnamon Chai</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
                         </div>
                         <div class="card-face card-back">
-                            <h3>Spiced Cinnamon Chai</h3>
-                            <p>Brewed with ginger, cloves, and heavy cinnamon.</p>
-                            <div class="back-details"><span>M / L</span><span>R40 / R44</span></div>
+                            <h3>The Spiced Cinnamon Chai</h3>
+                            <p>Authentic chai brewed with ginger, cloves, cardamom, and a dominant note of cinnamon.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>S / M / L</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R36 / R40 / R44</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="card-container" onclick="toggleFlip(this)">
+                    <div class="card">
+                        <div class="card-face card-front">
+                            <img src="The Minimal Matcha Pour.png" alt="The Minimal Matcha Pour">
+                            <div class="item-info-front">
+                                <h3>The Minimal Matcha Pour</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3>The Minimal Matcha Pour</h3>
+                            <p>Ceremonial-grade Japanese Matcha whisked with hot water, served pure and minimal.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>Double Shot</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R40</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-container" onclick="toggleFlip(this)">
+                    <div class="card">
+                        <div class="card-face card-front">
+                            <img src="The Golden Turmeric Latte.png" alt="The Golden Turmeric Latte">
+                            <div class="item-info-front">
+                                <h3>The Golden Turmeric Latte</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3>The Golden Turmeric Latte</h3>
+                            <p>Our powerful, warming blend of turmeric, ginger, black pepper, and steamed plant milk.</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>One Size</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R42</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-container" onclick="toggleFlip(this)">
+                    <div class="card">
+                        <div class="card-face card-front">
+                            <img src="The Signature Ceramic Latte.png" alt="The Signature Ceramic Latte">
+                            <div class="item-info-front">
+                                <h3>The Signature Ceramic Latte</h3>
+                                <a class="order-btn-card">tap for details</a>
+                            </div>
+                        </div>
+                        <div class="card-face card-back">
+                            <h3>The Signature Ceramic Latte</h3>
+                            <p>Our smoothest latte blend, served in a specially commissioned artisan ceramic cup (to keep or return).</p>
+                            <div class="back-details">
+                                <div class="sizes">
+                                    <p>One Size</p>
+                                </div>
+                                <div class="prices">
+                                    <p>R50 / R90*</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <p style="text-align:center; color: #555; margin-top: 30px;">*R90 with ceramic cup purchase.</p>
         </div>
     </section>
 
     <section id="contact">
         <div class="container">
             <h2 class="section-title">Fresh Grind, Fast.</h2>
-            <p>Ready for the best coffee in Rivonia? Call or WhatsApp us now.</p>
-            <a href="tel:0616235271" class="contact-btn">Call 061 623 5271</a>
+            <p>Ready to experience true Rivonia coffee? We are ready for you. For instant gratification, call or WhatsApp us now to place your order. Fast, next-gen assistance on the other end!</p>
+            <p><strong>Urban Grind Café</strong><br>123 Cozy Corner Way, Rivonia</p>
+            <a href="tel:0616235271" class="btn">Order Now: 061 623 5271</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Urban Grind Café, Rivonia.</p>
+            <p>&copy; 2023 Urban Grind Café, Rivonia. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#">Instagram</a> |
+                <a href="#">Facebook</a> |
+                <a href="#">X (Twitter)</a>
+            </div>
+            <p style="margin-top:20px; font-size: 0.8rem;">Designed for the next generation. Click to feel the grind.</p>
         </div>
     </footer>
 
     <script>
-        // Instant Navigation Logic
-        function instantNav(e, sectionId) {
-            e.preventDefault();
-            const target = document.getElementById(sectionId);
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'auto' 
-            });
-
-            // Close mobile menu
-            document.querySelector(".hamburger").classList.remove("active");
-            document.querySelector(".nav-links").classList.remove("active");
-        }
-
-        // Mobile Hamburger
+        // --- MOBILE HAMBURGER MENU ---
         const hamburger = document.querySelector(".hamburger");
         const navLinks = document.querySelector(".nav-links");
+
         hamburger.addEventListener("click", () => {
             hamburger.classList.toggle("active");
             navLinks.classList.toggle("active");
         });
 
-        // Card Flip
+        // Close menu when a link is clicked
+        document.querySelectorAll(".nav-links a").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navLinks.classList.remove("active");
+        }));
+
+        // --- CARD FLIP (Touch/Mobile UX) ---
         function toggleFlip(container) {
+            // Toggle the 'flipped' class on the card container
             container.classList.toggle("flipped");
         }
     </script>
