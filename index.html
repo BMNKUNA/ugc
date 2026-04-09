@@ -6,7 +6,7 @@
     <title>Urban Grind Café - Your Cozy Coffee Corner in Rivonia</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    //
+    
     <style>
         /* --- CSS VARIABLES --- */
         :root {
@@ -33,7 +33,6 @@
         }
 
         html {
-            /* Scroll behavior removed for instant "multi-page" feel */
             font-size: 16px;
         }
 
@@ -72,7 +71,7 @@
 
         section {
             padding: 100px 0;
-            min-height: 100vh; /* Ensures sections feel like individual pages */
+            min-height: 100vh;
             display: flex;
             align-items: center;
         }
@@ -138,7 +137,6 @@
 
         .nav-links a:hover { color: var(--accent-color); }
 
-        /* Phone Icon Animation */
         .phone-ring-btn {
             font-size: 1.5rem;
             color: var(--text-light);
@@ -193,24 +191,23 @@
             margin: 0 auto 2.5rem;
         }
 
-        /* WhatsApp Button */
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
             background-color: var(--whatsapp-green);
             color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
             animation: popUp 3s infinite;
+            font-size: 2rem;
         }
 
         .whatsapp-btn:hover {
             background-color: #1ebe57;
-            transform: translateY(-2px);
+            transform: scale(1.1);
         }
 
         /* --- ABOUT US --- */
@@ -230,29 +227,15 @@
         /* --- MENU SECTION --- */
         #menu { background-color: #f5f5f5; }
 
-.menu-grid {
-    display: grid;
-    /* Forces exactly 3 columns on larger screens */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 30px;
-}
-
-/* Add this right below it to keep mobile devices from looking squashed */
-@media screen and (max-width: 900px) {
-    .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media screen and (max-width: 600px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-    }
-}
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 30px;
+        }
 
         .card-container {
             perspective: 1000px;
             border-radius: 10px;
-            overflow: hidden;
         }
 
         .card {
@@ -263,6 +246,7 @@
             transition: transform 0.6s;
             cursor: pointer;
             box-shadow: var(--shadow);
+            border-radius: 10px;
         }
 
         .card-container:hover .card, 
@@ -278,6 +262,7 @@
             display: flex;
             flex-direction: column;
             border-radius: 10px;
+            overflow: hidden;
         }
 
         .card-front { background-color: white; }
@@ -286,7 +271,6 @@
             height: 70%;
             width: 100%;
             object-fit: cover;
-            border-radius: 10px 10px 0 0;
         }
 
         .item-info-front {
@@ -303,7 +287,9 @@
             color: var(--text-light);
             transform: rotateY(180deg);
             padding: 30px;
-            justify-content: space-between;
+            text-align: center;
+            justify-content: center;
+            gap: 20px;
         }
 
         .card-back h3 { color: var(--accent-color); }
@@ -312,6 +298,9 @@
             display: flex;
             justify-content: space-between;
             font-weight: 600;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 10px;
         }
 
         /* --- CONTACT --- */
@@ -329,6 +318,7 @@
             border-radius: 5px;
             font-weight: 600;
             font-size: 1.2rem;
+            margin-top: 20px;
         }
 
         /* --- FOOTER --- */
@@ -339,7 +329,11 @@
             text-align: center;
         }
 
-        /* --- MOBILE RESPONSIVE --- */
+        /* --- RESPONSIVE QUERIES --- */
+        @media screen and (max-width: 900px) {
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media screen and (max-width: 768px) {
             .hamburger { display: flex; }
             .nav-links {
@@ -357,6 +351,10 @@
             .nav-links.active { transform: translateX(0); }
             .about-content { grid-template-columns: 1fr; }
             #hero h1 { font-size: 2.5rem; }
+        }
+
+        @media screen and (max-width: 600px) {
+            .menu-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -389,7 +387,7 @@
             <h1>Your Rivonia Coffee Corner.</h1>
             <p>Welcome to Urban Grind Café. Nestled in a cozy corner of Rivonia, we craft exceptional beverages that fuel your day.</p>
             <a href="https://wa.me/27616235271?text=Hi%20Urban%20Grind!%20I'd%20like%20to%20order%20a%20drink." class="whatsapp-btn">
-                <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                <i class="fab fa-whatsapp"></i>
             </a>
         </div>
     </section>
@@ -460,7 +458,7 @@
                         <div class="card-face card-back">
                             <h3>Standard Cuppacino</h3>
                             <p>Classic 1:1 ratio of espresso, milk, and foam.</p>
-                            <div class="back-details"><span>S / M / L</span><span>R32 / R36</span></div>
+                            <div class="back-details"><span>S / M / L</span><span>R32 / R36 / R40</span></div>
                         </div>
                     </div>
                 </div>
@@ -490,45 +488,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-container" onclick="toggleFlip(this)">
-                    <div class="card">
-                        <div class="card-face card-front">
-                            <img src="The Minimal Matcha Pour.png" alt="Matcha">
-                            <div class="item-info-front"><h3>Minimal Matcha Pour</h3><small>Tap for details</small></div>
-                        </div>
-                        <div class="card-face card-back">
-                            <h3>Minimal Matcha Pour</h3>
-                            <p>Ceremonial-grade Japanese Matcha whisked pure.</p>
-                            <div class="back-details"><span>Double</span><span>R40</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-container" onclick="toggleFlip(this)">
-                    <div class="card">
-                        <div class="card-face card-front">
-                            <img src="The Golden Turmeric Latte.png" alt="Turmeric">
-                            <div class="item-info-front"><h3>Golden Turmeric Latte</h3><small>Tap for details</small></div>
-                        </div>
-                        <div class="card-face card-back">
-                            <h3>Golden Turmeric Latte</h3>
-                            <p>Warming turmeric, ginger, and plant milk.</p>
-                            <div class="back-details"><span>One Size</span><span>R42</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-container" onclick="toggleFlip(this)">
-                    <div class="card">
-                        <div class="card-face card-front">
-                            <img src="The Signature Ceramic Latte.png" alt="Ceramic Latte">
-                            <div class="item-info-front"><h3>Signature Ceramic Latte</h3><small>Tap for details</small></div>
-                        </div>
-                        <div class="card-face card-back">
-                            <h3>Signature Ceramic Latte</h3>
-                            <p>Our smoothest blend in an artisan ceramic cup.</p>
-                            <div class="back-details"><span>Special</span><span>R50</span></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -536,19 +495,19 @@
     <section id="contact">
         <div class="container">
             <h2 class="section-title">Fresh Grind, Fast.</h2>
-            <p>Ready for the best gen of coffee? Call or WhatsApp us now.</p>
+            <p>Ready for the best coffee in Rivonia? Call or WhatsApp us now.</p>
             <a href="tel:0616235271" class="contact-btn">Call 061 623 5271</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Urban Grind Café, Rivonia. Fast Next-Gen Assistance.</p>
+            <p>&copy; 2026 Urban Grind Café, Rivonia.</p>
         </div>
     </footer>
 
     <script>
-        // Instant "Multi-Page" Navigation Logic
+        // Instant Navigation Logic
         function instantNav(e, sectionId) {
             e.preventDefault();
             const target = document.getElementById(sectionId);
@@ -556,13 +515,12 @@
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-            // Instantly jump to position without smooth scroll
             window.scrollTo({
                 top: offsetPosition,
                 behavior: 'auto' 
             });
 
-            // Close mobile menu if open
+            // Close mobile menu
             document.querySelector(".hamburger").classList.remove("active");
             document.querySelector(".nav-links").classList.remove("active");
         }
