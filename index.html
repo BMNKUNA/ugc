@@ -8,116 +8,93 @@
   <style>
     :root {
       --primary-color: #5d4037;
-      --primary-light: #8d6e63;
+      --primary-light: #7a5a4f;
       --accent-color: #a1887f;
+      --accent-soft: #e8ddd4;
       --bg-color: #fffaf0;
+      --surface: #ffffff;
+      --surface-soft: #f7f1eb;
       --text-color: #2e1a0d;
-      --text-light: #fff;
+      --text-light: #ffffff;
+      --muted: #75655b;
       --font-heading: 'Playfair Display', serif;
       --font-body: 'Poppins', sans-serif;
-      --transition-speed: 0.3s;
-      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --header-height: 80px;
-      --radius: 12px;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.06);
+      --radius: 18px;
+      --header-height: 78px;
+      --page-max: 1200px;
+      --transition: 0.28s ease;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-font-smoothing: antialiased;
     }
 
     html {
-      scroll-behavior: smooth;
       font-size: 16px;
     }
 
     body {
       font-family: var(--font-body);
-      background-color: var(--bg-color);
+      background: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    h1, h2, h3 {
-      font-family: var(--font-heading);
-      margin-bottom: 1rem;
+    img {
+      display: block;
+      max-width: 100%;
     }
 
     a {
       text-decoration: none;
       color: inherit;
-      transition: color var(--transition-speed), background-color var(--transition-speed);
     }
 
-    ul {
-      list-style: none;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
+    button {
+      font: inherit;
     }
 
     .container {
-      max-width: 1200px;
+      width: min(var(--page-max), calc(100% - 32px));
       margin: 0 auto;
-      padding: 0 20px;
     }
 
-    section {
-      padding: 100px 0;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 3rem;
-      color: var(--primary-color);
-      margin-bottom: 3rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 28px;
-      background-color: var(--primary-color);
-      color: var(--text-light);
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background-color: var(--primary-light);
+    .page-shell {
+      min-height: 100vh;
+      padding-top: var(--header-height);
     }
 
     header {
-      background-color: var(--primary-color);
-      color: var(--text-light);
-      height: var(--header-height);
       position: fixed;
       top: 0;
-      width: 100%;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(93, 64, 55, 0.98);
+      backdrop-filter: blur(10px);
+      color: var(--text-light);
+      box-shadow: var(--shadow-soft);
       z-index: 1000;
-      display: flex;
-      align-items: center;
-      box-shadow: var(--shadow);
     }
 
     .navbar {
+      height: 100%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      width: 100%;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .logo {
       font-family: var(--font-heading);
       font-size: 1.8rem;
-      font-weight: bold;
+      font-weight: 700;
+      letter-spacing: 0.2px;
       white-space: nowrap;
     }
 
@@ -126,240 +103,415 @@
     }
 
     .nav-links {
+      list-style: none;
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 14px;
     }
 
-    .nav-links a:hover {
-      color: var(--accent-color);
+    .nav-links a,
+    .nav-links button {
+      border: none;
+      background: transparent;
+      color: var(--text-light);
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color var(--transition), color var(--transition), transform var(--transition);
     }
 
-    .order-btn-nav {
-      background-color: var(--text-light);
-      color: var(--primary-color);
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 1.1rem;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 54px;
-      min-height: 40px;
+    .nav-links a:hover,
+    .nav-links button:hover,
+    .nav-links .active-link {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .call-btn {
+      background: #fff !important;
+      color: var(--primary-color) !important;
+      min-width: 52px;
+      text-align: center;
+      font-weight: 600;
     }
 
     .hamburger {
       display: none;
-      cursor: pointer;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 10px;
     }
 
-    .bar {
-      width: 30px;
+    .hamburger span {
+      width: 28px;
       height: 3px;
-      background-color: var(--text-light);
-      border-radius: 3px;
-      transition: all 0.3s ease-in-out;
+      background: #fff;
+      border-radius: 999px;
+      transition: transform var(--transition), opacity var(--transition);
     }
 
-    #hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      text-align: center;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=2000&auto=format&fit=crop');
+    .hero {
+      min-height: calc(100vh - var(--header-height));
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.48)),
+        url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=2000&auto=format&fit=crop');
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
       color: var(--text-light);
-      padding-top: var(--header-height);
     }
 
-    #hero h1 {
-      font-size: 4rem;
-      margin-bottom: 1.5rem;
+    .hero-card {
+      text-align: center;
+      width: min(860px, 100%);
+      padding: 38px 24px;
     }
 
-    #hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-      opacity: 0.9;
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
     }
 
-    #about {
-      background-color: var(--bg-color);
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 26px;
+      font-size: 1.08rem;
+      opacity: 0.95;
     }
 
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform var(--transition), background-color var(--transition), color var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow-soft);
     }
 
-    .about-image {
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
-    #about p {
-      margin-bottom: 1.5rem;
-      color: #555;
+    .btn-primary {
+      background: var(--primary-color);
+      color: #fff;
     }
 
-    #about h3 {
+    .btn-primary:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-light {
+      background: rgba(255,255,255,0.95);
       color: var(--primary-color);
     }
 
-    #menu {
-      background-color: #f5f5f5;
+    .page {
+      display: none;
+      min-height: calc(100vh - var(--header-height));
+      padding: 42px 0 64px;
+      animation: pageFade 0.28s ease;
     }
 
-    .menu-grid {
+    .page.active {
+      display: block;
+    }
+
+    @keyframes pageFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-head {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+
+    .about-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      align-items: center;
     }
 
-    .card-container {
-      perspective: 1000px;
+    .panel {
+      background: var(--surface);
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .card {
-      width: 100%;
-      height: 400px;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.6s;
-      cursor: pointer;
-      box-shadow: var(--shadow);
+    .about-copy {
+      padding: 30px;
     }
 
-    .card-container:hover .card,
-    .card-container.flipped .card {
-      transform: rotateY(180deg);
+    .about-copy h3 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin-bottom: 14px;
+      color: var(--primary-color);
     }
 
-    .card-face {
+    .about-copy p + p {
+      margin-top: 14px;
+    }
+
+    .about-image img {
       width: 100%;
       height: 100%;
-      position: absolute;
-      inset: 0;
-      backface-visibility: hidden;
-      display: flex;
-      flex-direction: column;
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
-
-    .card-front {
-      background-color: #fff;
-    }
-
-    .card-front img {
-      height: 70%;
-      width: 100%;
+      min-height: 420px;
       object-fit: cover;
-      background-color: #efe7df;
     }
 
-    .item-info-front {
-      padding: 20px;
-      text-align: center;
-      min-height: 30%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .order-btn-card {
-      font-size: 0.95rem;
-      color: #5c463d;
-      font-weight: 500;
-    }
-
-    .card-back {
-      background-color: var(--primary-color);
-      color: var(--text-light);
-      transform: rotateY(180deg);
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card-back h3 {
-      color: var(--accent-color);
-      font-size: 1.8rem;
-    }
-
-    .card-back p {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    .back-details {
+    .menu-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      margin-top: auto;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
     }
 
-    .prices p,
-    .sizes p {
-      font-weight: 600;
+    .menu-note {
+      color: var(--muted);
+      font-size: 0.96rem;
     }
 
-    #contact {
-      background-color: var(--accent-color);
-      color: var(--text-light);
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+    }
+
+    .drink-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      border: 1px solid rgba(93, 64, 55, 0.06);
+    }
+
+    .drink-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .drink-image-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 12;
+      background: var(--accent-soft);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .drink-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: var(--accent-soft);
+    }
+
+    .drink-content {
+      padding: 20px 20px 18px;
       text-align: center;
     }
 
-    #contact .section-title {
-      color: var(--text-light);
+    .drink-content h3 {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      line-height: 1.15;
+      color: #4d362e;
+      margin-bottom: 10px;
     }
 
-    #contact p {
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
-      font-size: 1.1rem;
+    .drink-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
-    #contact .btn {
-      background-color: var(--text-light);
+    .detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .detail-image {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 480px;
+    }
+
+    .detail-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 480px;
+      object-fit: cover;
+      background: var(--accent-soft);
+    }
+
+    .detail-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .crumb {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .detail-card h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.1;
       color: var(--primary-color);
-      font-size: 1.3rem;
-      padding: 15px 40px;
+      margin-bottom: 14px;
+    }
+
+    .detail-card .desc {
+      color: #5b4b42;
+      margin-bottom: 22px;
+      font-size: 1.02rem;
+    }
+
+    .price-boxes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .price-box {
+      background: var(--surface-soft);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid rgba(93, 64, 55, 0.08);
+    }
+
+    .price-box strong {
+      display: block;
+      color: var(--primary-color);
+      margin-bottom: 4px;
+    }
+
+    .detail-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .contact-card h3 {
+      font-family: var(--font-heading);
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 24px;
+    }
+
+    .contact-list div {
+      padding: 14px 16px;
+      background: var(--surface-soft);
+      border-radius: 12px;
     }
 
     footer {
-      background-color: var(--primary-color);
-      color: rgba(255, 255, 255, 0.7);
-      padding: 40px 0;
+      background: var(--primary-color);
+      color: rgba(255,255,255,0.8);
+      padding: 24px 0;
       text-align: center;
     }
 
-    footer p {
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
     }
 
-    @media screen and (max-width: 768px) {
-      :root {
-        --header-height: 60px;
+    @media (max-width: 980px) {
+      .about-grid,
+      .detail-layout,
+      .contact-grid {
+        grid-template-columns: 1fr;
       }
 
-      .section-title {
-        font-size: 2.2rem;
+      .detail-image,
+      .detail-image img {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      :root {
+        --header-height: 68px;
       }
 
       .hamburger {
@@ -368,60 +520,56 @@
 
       .nav-links {
         position: absolute;
-        top: var(--header-height);
-        right: 0;
-        height: calc(100vh - var(--header-height));
-        background-color: var(--primary-color);
-        width: 70%;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 40px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        gap: 30px;
-        box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
-      }
-
-      .nav-links.active {
-        transform: translateX(0%);
-      }
-
-      .order-btn-nav {
+        top: calc(var(--header-height) - 2px);
+        right: 12px;
+        width: min(320px, calc(100% - 24px));
+        background: var(--primary-color);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 12px;
         display: none;
+        flex-direction: column;
+        align-items: stretch;
       }
 
-      .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
+      .nav-links.open {
+        display: flex;
       }
 
-      .hamburger.active .bar:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
+      .nav-links li {
+        width: 100%;
       }
 
-      .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+      .nav-links a,
+      .nav-links button {
+        width: 100%;
+        text-align: left;
       }
 
-      #hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        height: 350px;
-      }
-
-      .item-info-front h3 {
-        font-size: 1.1rem;
+      .call-btn {
+        text-align: center !important;
       }
     }
 
-    @media screen and (max-width: 992px) {
-      #hero h1 {
-        font-size: 3rem;
+    @media (max-width: 560px) {
+      .container {
+        width: min(var(--page-max), calc(100% - 20px));
+      }
+
+      .hero-card {
+        padding: 24px 4px;
+      }
+
+      .price-boxes {
+        grid-template-columns: 1fr;
+      }
+
+      .drink-content h3 {
+        font-size: 1.45rem;
+      }
+
+      .detail-card {
+        padding: 24px;
       }
     }
   </style>
@@ -429,62 +577,145 @@
 <body>
   <header>
     <div class="container navbar">
-      <a href="#hero" class="logo">URBAN GRIND <span>CAFÉ</span></a>
-      <ul class="nav-links">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li>
-          <a href="tel:0616235271" class="order-btn-nav" aria-label="Call Urban Grind Café">📞</a>
-        </li>
+      <a href="#home" class="logo" data-route="home">URBAN GRIND <span>CAFÉ</span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" data-route="home" class="nav-link">Home</a></li>
+        <li><a href="#about" data-route="about" class="nav-link">About</a></li>
+        <li><a href="#menu" data-route="menu" class="nav-link">Menu</a></li>
+        <li><a href="#contact" data-route="contact" class="nav-link">Contact</a></li>
+        <li><a href="tel:0616235271" class="call-btn">📞 Call</a></li>
       </ul>
-      <div class="hamburger" aria-label="Open navigation" aria-expanded="false" role="button" tabindex="0">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+
+      <div class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
   </header>
 
-  <section id="hero">
-    <div class="container">
-      <h1>Your Rivonia Coffee Corner.</h1>
-      <p>Welcome to Urban Grind Café. Nestled in a cozy corner of Rivonia, we craft exceptional coffee and hot beverages using the finest beans and a lot of heart. Fast service, friendly faces, and the perfect atmosphere to grind or unwind.</p>
-      <a href="#menu" class="btn">View Our Menu</a>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container about-content">
-      <div class="about-text">
-        <h2 class="section-title" style="text-align:left;">The Urban Grind Story</h2>
-        <p>We are a community-driven café born from a passion for perfect roasts and genuine connections. Located in a tucked-away cozy corner in the heart of Rivonia, Urban Grind is not just a coffee shop; it is a neighborhood haven.</p>
-        <p>We believe in the authentic coffee house experience, from the first rich aroma to the last satisfying sip. We source ethically and roast to perfection. Whether you need a quick pick-me-up or a peaceful spot to catch up, we have a seat for you.</p>
-        <h3>Stop by, stay awhile. We cannot wait to serve you.</h3>
+  <main class="page-shell">
+    <section class="hero page active" id="page-home" data-page="home">
+      <div class="container hero-card">
+        <h1>Your Rivonia Coffee Corner.</h1>
+        <p>Welcome to Urban Grind Café. We craft exceptional coffee and hot beverages with warmth, speed, and a cozy local feel. Browse the site like full pages, open each drink like its own page, and keep every image showing correctly.</p>
+        <div class="btn-row">
+          <button class="btn btn-primary" data-route="menu">Explore the Menu</button>
+          <button class="btn btn-light" data-route="about">Our Story</button>
+        </div>
       </div>
-      <div class="about-image">
-        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1000&auto=format&fit=crop" alt="Cozy coffee shop corner in Rivonia">
+    </section>
+
+    <section class="page" id="page-about" data-page="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>The Urban Grind Story</h2>
+          <p>A warm neighborhood café built around great coffee, thoughtful drinks, and the feeling of staying a little longer than planned.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="panel about-copy">
+            <h3>Made for Rivonia mornings and slow afternoons.</h3>
+            <p>Urban Grind Café is a community-first coffee spot inspired by cozy corners, quality beans, and genuine service. Every drink is designed to feel crafted, balanced, and welcoming.</p>
+            <p>Whether you are stepping in for a quick cappuccino, sitting down with a friend, or ordering ahead by phone, the experience should feel smooth and personal.</p>
+            <p>Our menu brings together signature lattes, spiced drinks, iced favorites, and café classics, all presented with a clean modern look that reflects the warmth of the brand.</p>
+            <div class="detail-actions" style="margin-top:20px;">
+              <button class="btn btn-primary" data-route="menu">See the Drinks</button>
+              <button class="btn btn-light" data-route="contact">Visit or Order</button>
+            </div>
+          </div>
+
+          <div class="panel about-image">
+            <img
+              src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1200&auto=format&fit=crop"
+              alt="Cozy coffee shop corner"
+            >
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="menu">
-    <div class="container">
-      <h2 class="section-title">Our Grind. Your Fuel.</h2>
-      <div class="menu-grid" id="menuGrid"></div>
-      <p style="text-align:center; color: #555; margin-top: 30px;">*R90 with ceramic cup purchase.</p>
-    </div>
-  </section>
+    <section class="page" id="page-menu" data-page="menu">
+      <div class="container">
+        <div class="section-head">
+          <h2>Our Grind. Your Fuel.</h2>
+          <p>Each drink opens like its own page instead of flipping or scrolling. Click any item below to view the full drink page.</p>
+        </div>
 
-  <section id="contact">
-    <div class="container">
-      <h2 class="section-title">Fresh Grind, Fast.</h2>
-      <p>Ready to experience true Rivonia coffee? We are ready for you. For instant gratification, call or WhatsApp us now to place your order.</p>
-      <p><strong>Urban Grind Café</strong><br>123 Cozy Corner Way, Rivonia</p>
-      <a href="tel:0616235271" class="btn">Order Now: 061 623 5271</a>
-    </div>
-  </section>
+        <div class="menu-toolbar">
+          <div class="menu-note">All product images are protected with automatic fallback handling so empty image blocks do not appear.</div>
+          <button class="btn btn-primary" data-route="contact">Order by Phone</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-drink" data-page="drink">
+      <div class="container">
+        <div class="detail-layout">
+          <div class="detail-image">
+            <img id="detailImage" src="" alt="Drink image">
+          </div>
+
+          <div class="detail-card">
+            <div class="crumb">Menu / Signature Drink</div>
+            <h2 id="detailName">Drink Name</h2>
+            <p class="desc" id="detailDescription">Drink description goes here.</p>
+
+            <div class="price-boxes">
+              <div class="price-box">
+                <strong>Available Sizes</strong>
+                <span id="detailSizes">S / M / L</span>
+              </div>
+              <div class="price-box">
+                <strong>Price</strong>
+                <span id="detailPrices">R00 / R00 / R00</span>
+              </div>
+            </div>
+
+            <div class="detail-actions">
+              <button class="btn btn-primary" id="orderThisDrink">Call to Order</button>
+              <button class="btn btn-light" data-route="menu">Back to Menu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-contact" data-page="contact">
+      <div class="container">
+        <div class="section-head">
+          <h2>Fresh Grind, Fast.</h2>
+          <p>Ready to order? Reach Urban Grind Café directly for quick collection or easy enquiries.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Call or WhatsApp us</h3>
+            <p>Get your drink order in quickly and keep things simple.</p>
+            <div class="contact-list">
+              <div><strong>Phone:</strong> 061 623 5271</div>
+              <div><strong>Location:</strong> 123 Cozy Corner Way, Rivonia</div>
+              <div><strong>Hours:</strong> Mon to Sat, 7:00 AM to 6:00 PM</div>
+            </div>
+            <a href="tel:0616235271" class="btn btn-primary">Order Now</a>
+          </div>
+
+          <div class="contact-card">
+            <h3>Why this version works better</h3>
+            <p>This code uses page-style navigation with hash routes, not scroll jumps. The menu and navigation feel like moving to new pages while still staying in one HTML file.</p>
+            <p>Every drink image also uses a filename alias system plus an automatic fallback image so broken local image names do not leave blank spaces.</p>
+            <div class="detail-actions" style="margin-top:18px;">
+              <button class="btn btn-light" data-route="home">Back Home</button>
+              <button class="btn btn-primary" data-route="menu">Browse Menu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <div class="container">
@@ -493,146 +724,244 @@
   </footer>
 
   <script>
-    const menuItems = [
+    const drinks = [
       {
-        name: "The Spiced Cloud Latte",
-        image: "The Spiced Cloud Latte.png",
-        alt: "The Spiced Cloud Latte",
-        description: "An ethereal blend of vanilla and seasonal spices, topped with a velvety layer of cloud-like foam.",
-        sizes: "S / M / L",
-        prices: "R38 / R42 / R46"
+        slug: 'spiced-cloud-latte',
+        name: 'The Spiced Cloud Latte',
+        imageCandidates: [
+          'The Spiced Cloud Latte.png'
+        ],
+        description: 'An ethereal blend of vanilla and seasonal spices, topped with a velvety layer of cloud-like foam.',
+        sizes: 'S / M / L',
+        prices: 'R38 / R42 / R46'
       },
       {
-        name: "Artisanal Spiced Hot Chocolate",
-        image: "Artisanal Spiced Hot Chocolate.png",
-        alt: "Artisanal Spiced Hot Chocolate",
-        description: "Rich, melted Belgian chocolate infused with a secret blend of five warming spices.",
-        sizes: "S / L",
-        prices: "R45 / R55"
+        slug: 'artisanal-spiced-hot-chocolate',
+        name: 'Artisanal Spiced Hot Chocolate',
+        imageCandidates: [
+          'Artisanal Spiced Hot Chocolate.png'
+        ],
+        description: 'Rich, melted Belgian chocolate infused with a secret blend of five warming spices.',
+        sizes: 'S / L',
+        prices: 'R45 / R55'
       },
       {
-        name: "The Hibiscus Iced Tea",
-        image: "The Hibiscus Iced Tea.png",
-        alt: "The Hibiscus Iced Tea",
-        description: "A refreshing, vibrant brew of hibiscus petals and forest berries, served chilled.",
-        sizes: "Standard",
-        prices: "R35"
+        slug: 'hibiscus-iced-tea',
+        name: 'The Hibiscus Iced Tea',
+        imageCandidates: [
+          'The Hibiscus Iced Tea.png',
+          'The Hibiscus IcedTea.png'
+        ],
+        description: 'A refreshing, vibrant brew of hibiscus petals and forest berries, served chilled.',
+        sizes: 'Standard',
+        prices: 'R35'
       },
       {
-        name: "The Standard Cappuccino",
-        image: "The Standard Cappuccino.png",
-        alt: "The Standard Cappuccino",
-        description: "Classic 1:1 ratio of espresso, steamed milk, and milk foam. Simple perfection.",
-        sizes: "S / M / L",
-        prices: "R32 / R36 / R40"
+        slug: 'standard-cappuccino',
+        name: 'The Standard Cappuccino',
+        imageCandidates: [
+          'The Standard Cappuccino.png',
+          'The Standard Cuppacino.png'
+        ],
+        description: 'Classic espresso, steamed milk, and milk foam in perfect balance.',
+        sizes: 'S / M / L',
+        prices: 'R32 / R36 / R40'
       },
       {
-        name: "The Iced Foam Latte",
-        image: "The Iced Foam Latte.png",
-        alt: "The Iced Foam Latte",
-        description: "Classic espresso over ice, finished with a generous head of cold milk foam.",
-        sizes: "S / L",
-        prices: "R38 / R48"
+        slug: 'iced-foam-latte',
+        name: 'The Iced Foam Latte',
+        imageCandidates: [
+          'The Iced Foam Latte.png',
+          'The Iced foam Latte.png'
+        ],
+        description: 'Classic espresso over ice, finished with a generous head of cold milk foam.',
+        sizes: 'S / L',
+        prices: 'R38 / R48'
       },
       {
-        name: "The Spiced Cinnamon Chai",
-        image: "The Spiced Cinnamon Chai.png",
-        alt: "The Spiced Cinnamon Chai",
-        description: "Authentic chai brewed with ginger, cloves, cardamom, and a dominant note of cinnamon.",
-        sizes: "S / M / L",
-        prices: "R36 / R40 / R44"
+        slug: 'spiced-cinnamon-chai',
+        name: 'The Spiced Cinnamon Chai',
+        imageCandidates: [
+          'The Spiced Cinnamon Chai.png'
+        ],
+        description: 'Authentic chai brewed with ginger, cloves, cardamom, and a warm cinnamon finish.',
+        sizes: 'S / M / L',
+        prices: 'R36 / R40 / R44'
       },
       {
-        name: "The Minimal Matcha Pour",
-        image: "The Minimal Matcha Pour.png",
-        alt: "The Minimal Matcha Pour",
-        description: "Ceremonial-grade Japanese matcha whisked with hot water, served pure and minimal.",
-        sizes: "Double Shot",
-        prices: "R40"
+        slug: 'minimal-matcha-pour',
+        name: 'The Minimal Matcha Pour',
+        imageCandidates: [
+          'The Minimal Matcha Pour.png'
+        ],
+        description: 'Ceremonial-grade Japanese matcha whisked with hot water, served pure and minimal.',
+        sizes: 'Double Shot',
+        prices: 'R40'
       },
       {
-        name: "The Golden Turmeric Latte",
-        image: "The Golden Turmeric Latte.png",
-        alt: "The Golden Turmeric Latte",
-        description: "Our powerful, warming blend of turmeric, ginger, black pepper, and steamed plant milk.",
-        sizes: "One Size",
-        prices: "R42"
+        slug: 'golden-turmeric-latte',
+        name: 'The Golden Turmeric Latte',
+        imageCandidates: [
+          'The Golden Turmeric Latte.png'
+        ],
+        description: 'A warming blend of turmeric, ginger, black pepper, and steamed plant milk.',
+        sizes: 'One Size',
+        prices: 'R42'
       },
       {
-        name: "The Signature Ceramic Latte",
-        image: "The Signature Ceramic Latte.png",
-        alt: "The Signature Ceramic Latte",
-        description: "Our smoothest latte blend, served in a specially commissioned artisan ceramic cup to keep or return.",
-        sizes: "One Size",
-        prices: "R50 / R90*"
+        slug: 'signature-ceramic-latte',
+        name: 'The Signature Ceramic Latte',
+        imageCandidates: [
+          'The Signature Ceramic Latte.png'
+        ],
+        description: 'Our smoothest latte blend, served in a specially commissioned artisan ceramic cup to keep or return.',
+        sizes: 'One Size',
+        prices: 'R50 / R90*'
       }
     ];
 
-    const menuGrid = document.getElementById("menuGrid");
+    const menuGrid = document.getElementById('menuGrid');
+    const detailName = document.getElementById('detailName');
+    const detailDescription = document.getElementById('detailDescription');
+    const detailSizes = document.getElementById('detailSizes');
+    const detailPrices = document.getElementById('detailPrices');
+    const detailImage = document.getElementById('detailImage');
+    const orderThisDrink = document.getElementById('orderThisDrink');
 
-    function createCard(item) {
-      const container = document.createElement("div");
-      container.className = "card-container";
-      container.innerHTML = `
-        <div class="card">
-          <div class="card-face card-front">
-            <img src="${encodeURI(item.image)}" alt="${item.alt}" loading="lazy">
-            <div class="item-info-front">
-              <h3>${item.name}</h3>
-              <span class="order-btn-card">tap for details</span>
-            </div>
-          </div>
-          <div class="card-face card-back">
-            <h3>${item.name}</h3>
-            <p>${item.description}</p>
-            <div class="back-details">
-              <div class="sizes"><p>${item.sizes}</p></div>
-              <div class="prices"><p>${item.prices}</p></div>
-            </div>
-          </div>
+    const placeholderFor = (label) =>
+      `https://placehold.co/1200x900/e8ddd4/5d4037?text=${encodeURIComponent(label)}`;
+
+    function loadImageWithFallback(imgEl, candidates, altText) {
+      let index = 0;
+
+      function tryNext() {
+        if (index < candidates.length) {
+          imgEl.src = encodeURI(candidates[index]);
+          index += 1;
+        } else {
+          imgEl.onerror = null;
+          imgEl.src = placeholderFor(altText);
+        }
+      }
+
+      imgEl.alt = altText;
+      imgEl.onerror = tryNext;
+      tryNext();
+    }
+
+    function createDrinkCard(drink) {
+      const card = document.createElement('article');
+      card.className = 'drink-card';
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `Open ${drink.name}`);
+
+      card.innerHTML = `
+        <div class="drink-image-wrap">
+          <img class="drink-image" alt="${drink.name}" loading="lazy">
+        </div>
+        <div class="drink-content">
+          <h3>${drink.name}</h3>
+          <p>Tap to open drink page</p>
         </div>
       `;
 
-      const image = container.querySelector("img");
-      image.addEventListener("error", () => {
-        image.src = `https://placehold.co/900x700/f0e5dc/5d4037?text=${encodeURIComponent(item.name)}`;
-      }, { once: true });
+      const image = card.querySelector('.drink-image');
+      loadImageWithFallback(image, drink.imageCandidates, drink.name);
 
-      container.addEventListener("click", () => {
-        container.classList.toggle("flipped");
+      const openDrink = () => {
+        location.hash = `drink/${drink.slug}`;
+      };
+
+      card.addEventListener('click', openDrink);
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openDrink();
+        }
       });
 
-      return container;
+      return card;
     }
 
-    menuItems.forEach(item => {
-      menuGrid.appendChild(createCard(item));
+    drinks.forEach((drink) => menuGrid.appendChild(createDrinkCard(drink)));
+
+    const pages = document.querySelectorAll('.page');
+    const navLinks = document.querySelectorAll('[data-route]');
+    const navMenu = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+
+    function setActivePage(pageName) {
+      pages.forEach((page) => {
+        page.classList.toggle('active', page.dataset.page === pageName);
+      });
+
+      navLinks.forEach((link) => {
+        const route = link.dataset.route;
+        link.classList.toggle('active-link', route === pageName && pageName !== 'drink');
+      });
+
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    function renderDrinkPage(slug) {
+      const drink = drinks.find((item) => item.slug === slug) || drinks[0];
+      detailName.textContent = drink.name;
+      detailDescription.textContent = drink.description;
+      detailSizes.textContent = drink.sizes;
+      detailPrices.textContent = drink.prices;
+      loadImageWithFallback(detailImage, drink.imageCandidates, drink.name);
+      orderThisDrink.onclick = () => {
+        window.location.href = 'tel:0616235271';
+      };
+      setActivePage('drink');
+    }
+
+    function routeFromHash() {
+      const raw = location.hash.replace(/^#/, '') || 'home';
+      const parts = raw.split('/');
+      const main = parts[0];
+
+      if (main === 'drink' && parts[1]) {
+        renderDrinkPage(parts[1]);
+        return;
+      }
+
+      const validPages = ['home', 'about', 'menu', 'contact'];
+      const target = validPages.includes(main) ? main : 'home';
+      setActivePage(target);
+    }
+
+    document.querySelectorAll('[data-route]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const route = link.dataset.route;
+        if (!route) return;
+
+        if (link.tagName.toLowerCase() === 'button' || link.getAttribute('href')?.startsWith('#')) {
+          event.preventDefault();
+          location.hash = route;
+        }
+
+        navMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
     });
 
-    const hamburger = document.querySelector(".hamburger");
-    const navLinks = document.querySelector(".nav-links");
-
     function toggleMenu() {
-      hamburger.classList.toggle("active");
-      navLinks.classList.toggle("active");
-      hamburger.setAttribute("aria-expanded", hamburger.classList.contains("active"));
+      const isOpen = navMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
     }
 
-    hamburger.addEventListener("click", toggleMenu);
-    hamburger.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
+    hamburger.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         toggleMenu();
       }
     });
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navLinks.classList.remove("active");
-        hamburger.setAttribute("aria-expanded", "false");
-      });
-    });
+    window.addEventListener('hashchange', routeFromHash);
+    routeFromHash();
   </script>
 </body>
 </html>
