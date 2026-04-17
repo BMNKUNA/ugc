@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Urban Grind Café - Your Cozy Coffee Corner in Rivonia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Urban Grind Café - Rivonia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #6f4b3e;
-      --primary-dark: #5d4037;
-      --primary-light: #8a6659;
-      --accent-color: #c7a892;
-      --bg-color: #f7f1e8;
+      --primary: #6f4b3e;
+      --primary-dark: #55372d;
+      --primary-light: #8b695b;
+      --accent: #d2b39a;
+      --bg: #f7f1e8;
       --surface: #ffffff;
-      --surface-soft: #efe7de;
-      --text-color: #2f221c;
-      --text-light: #ffffff;
-      --muted: #736158;
-      --border: rgba(111, 75, 62, 0.10);
-      --shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-      --shadow-soft: 0 8px 18px rgba(0, 0, 0, 0.05);
-      --radius: 18px;
-      --page-max: 1200px;
+      --surface-soft: #efe6dc;
+      --text: #2f221c;
+      --muted: #6f625b;
+      --white: #ffffff;
+      --border: rgba(111, 75, 62, 0.12);
+      --shadow: 0 14px 35px rgba(50, 33, 26, 0.10);
+      --shadow-soft: 0 8px 20px rgba(50, 33, 26, 0.07);
+      --radius: 20px;
       --header-height: 78px;
+      --max-width: 1200px;
+      --transition: 0.28s ease;
       --font-heading: 'Playfair Display', serif;
       --font-body: 'Poppins', sans-serif;
-      --transition: 0.28s ease;
     }
 
     * {
@@ -36,18 +38,18 @@
 
     html {
       font-size: 16px;
+      scroll-behavior: smooth;
     }
 
     body {
       font-family: var(--font-body);
-      background: var(--bg-color);
-      color: var(--text-color);
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    img,
-    iframe {
+    img, iframe {
       display: block;
       max-width: 100%;
     }
@@ -61,24 +63,36 @@
       font: inherit;
       border: none;
       background: none;
+      color: inherit;
+      cursor: pointer;
     }
 
     .container {
-      width: min(var(--page-max), calc(100% - 32px));
+      width: min(var(--max-width), calc(100% - 32px));
       margin: 0 auto;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      inset: 0 0 auto 0;
       height: var(--header-height);
-      background: rgba(111, 75, 62, 0.98);
-      color: var(--text-light);
       z-index: 1000;
+      background: rgba(111, 75, 62, 0.97);
+      backdrop-filter: blur(12px);
       box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(10px);
+      color: var(--white);
     }
 
     .navbar {
@@ -86,87 +100,94 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 18px;
     }
 
     .logo {
       font-family: var(--font-heading);
-      font-size: 2rem;
+      font-size: clamp(1.45rem, 2vw, 2rem);
       font-weight: 700;
+      letter-spacing: 0.02em;
       white-space: nowrap;
     }
 
     .logo span {
-      color: var(--accent-color);
+      color: var(--accent);
     }
 
     .nav-links {
       list-style: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .nav-links a,
-    .nav-links button {
-      color: var(--text-light);
+    .nav-link,
+    .call-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
       padding: 10px 14px;
       border-radius: 12px;
-      cursor: pointer;
-      transition: background-color var(--transition), transform var(--transition);
+      transition: background-color var(--transition), transform var(--transition), color var(--transition);
     }
 
-    .nav-links a:hover,
-    .nav-links button:hover,
-    .nav-links .active-link {
-      background: rgba(255, 255, 255, 0.14);
+    .nav-link:hover,
+    .nav-link.active-link,
+    .call-btn:hover {
       transform: translateY(-1px);
     }
 
+    .nav-link:hover,
+    .nav-link.active-link {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
     .call-btn {
-      background: #ffffff !important;
-      color: var(--primary-dark) !important;
-      font-weight: 600;
-      min-width: 76px;
-      text-align: center;
+      background: var(--white);
+      color: var(--primary-dark);
+      font-weight: 700;
     }
 
     .hamburger {
       display: none;
       flex-direction: column;
+      justify-content: center;
       gap: 5px;
-      padding: 8px;
-      cursor: pointer;
+      width: 46px;
+      height: 46px;
       border-radius: 12px;
     }
 
     .hamburger span {
-      width: 28px;
+      width: 26px;
       height: 3px;
-      background: #fff;
+      background: var(--white);
       border-radius: 999px;
+      margin-inline: auto;
     }
 
     .page-shell {
-      min-height: 100vh;
       padding-top: var(--header-height);
+      min-height: 100vh;
     }
 
     .page {
       display: none;
       min-height: calc(100vh - var(--header-height));
-      padding: 44px 0 68px;
-      animation: fadePage 0.28s ease;
+      padding: 46px 0 70px;
+      animation: pageFade 0.28s ease;
     }
 
     .page.active {
       display: block;
     }
 
-    @keyframes fadePage {
+    @keyframes pageFade {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(12px);
       }
       to {
         opacity: 1;
@@ -179,38 +200,42 @@
       display: grid;
       place-items: center;
       background:
-        linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.42)),
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.45)),
         url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=2000&auto=format&fit=crop');
       background-size: cover;
       background-position: center;
-      color: #fff;
+      color: var(--white);
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     .hero-card {
-      text-align: center;
       width: min(860px, 100%);
-      padding: 32px 10px;
+      padding: 30px 10px;
+      text-align: center;
     }
 
     .hero h1 {
       font-family: var(--font-heading);
-      font-size: clamp(2.6rem, 5vw, 4.8rem);
-      line-height: 1.05;
-      margin-bottom: 18px;
+      font-size: clamp(2.7rem, 5vw, 5rem);
+      line-height: 1.02;
+      margin-bottom: 16px;
     }
 
     .hero p {
-      max-width: 710px;
+      max-width: 720px;
       margin: 0 auto 26px;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       opacity: 0.96;
     }
 
     .btn-row,
-    .detail-actions {
+    .detail-actions,
+    .about-actions,
+    .card-actions {
       display: flex;
-      gap: 14px;
       flex-wrap: wrap;
+      gap: 14px;
     }
 
     .btn-row {
@@ -221,12 +246,12 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      min-height: 48px;
       padding: 14px 24px;
-      border-radius: 13px;
-      cursor: pointer;
+      border-radius: 14px;
       font-weight: 600;
-      transition: transform var(--transition), background-color var(--transition), color var(--transition);
       box-shadow: var(--shadow-soft);
+      transition: transform var(--transition), background-color var(--transition), color var(--transition), border-color var(--transition);
     }
 
     .btn:hover {
@@ -234,8 +259,8 @@
     }
 
     .btn-primary {
-      background: var(--primary-color);
-      color: #fff;
+      background: var(--primary);
+      color: var(--white);
     }
 
     .btn-primary:hover {
@@ -243,13 +268,24 @@
     }
 
     .btn-light {
-      background: #fff;
+      background: var(--white);
       color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: var(--surface-soft);
     }
 
     .section-head {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
     }
 
     .section-head h2 {
@@ -260,17 +296,17 @@
     }
 
     .section-head p {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       color: var(--muted);
     }
 
     .panel {
       background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
-      border: 1px solid var(--border);
     }
 
     .about-grid,
@@ -281,19 +317,23 @@
     }
 
     .about-grid {
-      grid-template-columns: 1.02fr 0.98fr;
+      grid-template-columns: 1.03fr 0.97fr;
       align-items: center;
     }
 
-    .about-copy {
+    .about-copy,
+    .contact-card,
+    .detail-card {
       padding: 32px;
     }
 
-    .about-copy h3 {
+    .about-copy h3,
+    .contact-card h3 {
       font-family: var(--font-heading);
-      font-size: 2rem;
       color: var(--primary-dark);
+      font-size: 2rem;
       margin-bottom: 14px;
+      line-height: 1.15;
     }
 
     .about-copy p + p {
@@ -302,55 +342,110 @@
 
     .about-image img {
       width: 100%;
-      min-height: 430px;
       height: 100%;
+      min-height: 430px;
       object-fit: cover;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
+      align-items: stretch;
     }
 
-    .drink-card {
-      background: #fff;
+    .flip-card {
+      perspective: 1400px;
+      min-height: 430px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      transform-style: preserve-3d;
+      transition: transform 0.7s ease;
+    }
+
+    .flip-card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: var(--shadow-soft);
+      background: var(--surface);
       border: 1px solid var(--border);
-      transition: transform var(--transition), box-shadow var(--transition);
-      cursor: pointer;
+      box-shadow: var(--shadow-soft);
     }
 
-    .drink-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
+    .flip-card-front {
+      transform: rotateY(0deg);
     }
 
-    .drink-image-wrap {
+    .flip-card-back {
+      transform: rotateY(180deg);
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      background: linear-gradient(180deg, #fff, #f7efe7);
+    }
+
+    .flip-card-back h3 {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      line-height: 1.12;
+    }
+
+    .flip-card-back p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .flip-card-back .meta {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .flip-card-back .meta div {
+      padding: 12px 14px;
+      background: rgba(111, 75, 62, 0.06);
+      border-radius: 12px;
+      border: 1px solid rgba(111, 75, 62, 0.08);
+    }
+
+    .flip-card-front .drink-image-wrap {
       width: 100%;
-      aspect-ratio: 16 / 12;
+      aspect-ratio: 4 / 3;
       background: var(--surface-soft);
       overflow: hidden;
     }
 
-    .drink-image {
+    .flip-card-front .drink-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      background: var(--surface-soft);
     }
 
     .drink-content {
-      padding: 20px;
+      padding: 22px 20px 24px;
       text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .drink-content h3 {
       font-family: var(--font-heading);
       font-size: 1.7rem;
-      line-height: 1.15;
+      line-height: 1.12;
       color: var(--primary-dark);
       margin-bottom: 8px;
     }
@@ -365,20 +460,19 @@
       align-items: stretch;
     }
 
-    .detail-image {
+    .detail-image,
+    .detail-image img {
       min-height: 500px;
     }
 
     .detail-image img {
       width: 100%;
       height: 100%;
-      min-height: 500px;
       object-fit: cover;
       background: var(--surface-soft);
     }
 
     .detail-card {
-      padding: 34px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -387,13 +481,13 @@
     .crumb {
       color: var(--muted);
       margin-bottom: 10px;
-      font-size: 0.94rem;
+      font-size: 0.95rem;
     }
 
     .detail-card h2 {
       font-family: var(--font-heading);
-      font-size: clamp(2.3rem, 4vw, 3.6rem);
-      line-height: 1.08;
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
+      line-height: 1.05;
       color: var(--primary-dark);
       margin-bottom: 14px;
     }
@@ -408,7 +502,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .price-box {
@@ -429,17 +523,6 @@
       align-items: start;
     }
 
-    .contact-card {
-      padding: 30px;
-    }
-
-    .contact-card h3 {
-      font-family: var(--font-heading);
-      color: var(--primary-dark);
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-
     .contact-card p {
       color: var(--muted);
       margin-bottom: 14px;
@@ -455,15 +538,16 @@
       padding: 14px 16px;
       background: var(--surface-soft);
       border-radius: 12px;
+      border: 1px solid var(--border);
     }
 
     .map-wrap {
-      border-radius: 16px;
-      overflow: hidden;
+      margin-top: 18px;
       min-height: 360px;
+      overflow: hidden;
+      border-radius: 16px;
       background: var(--surface-soft);
       border: 1px solid var(--border);
-      margin-top: 18px;
     }
 
     .map-wrap iframe {
@@ -474,9 +558,48 @@
 
     footer {
       background: var(--primary-dark);
-      color: rgba(255,255,255,0.84);
+      color: rgba(255, 255, 255, 0.85);
       text-align: center;
       padding: 24px 0;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .flip-card:hover .flip-card-inner,
+      .flip-card:focus-within .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .flip-card {
+        min-height: auto;
+      }
+
+      .flip-card-inner {
+        min-height: auto;
+        transform: none !important;
+      }
+
+      .flip-card-face {
+        position: relative;
+        inset: auto;
+        backface-visibility: visible;
+        -webkit-backface-visibility: visible;
+      }
+
+      .flip-card-front {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+
+      .flip-card-back {
+        transform: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top: none;
+        box-shadow: var(--shadow-soft);
+      }
     }
 
     @media (max-width: 980px) {
@@ -506,10 +629,10 @@
         top: calc(var(--header-height) - 2px);
         right: 12px;
         width: min(320px, calc(100% - 24px));
-        background: var(--primary-color);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
         padding: 12px;
+        border-radius: 18px;
+        background: var(--primary);
+        box-shadow: var(--shadow);
         display: none;
         flex-direction: column;
         align-items: stretch;
@@ -523,34 +646,35 @@
         width: 100%;
       }
 
-      .nav-links a,
-      .nav-links button {
+      .nav-link,
+      .call-btn {
         width: 100%;
-        text-align: left;
+        justify-content: flex-start;
       }
 
       .call-btn {
-        text-align: center !important;
+        justify-content: center;
       }
     }
 
     @media (max-width: 560px) {
       .container {
-        width: min(var(--page-max), calc(100% - 20px));
+        width: min(var(--max-width), calc(100% - 20px));
+      }
+
+      .about-copy,
+      .contact-card,
+      .detail-card {
+        padding: 24px;
       }
 
       .price-boxes {
         grid-template-columns: 1fr;
       }
 
-      .drink-content h3 {
-        font-size: 1.45rem;
-      }
-
-      .detail-card,
-      .about-copy,
-      .contact-card {
-        padding: 24px;
+      .drink-content h3,
+      .flip-card-back h3 {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -561,18 +685,18 @@
       <a href="#home" class="logo" data-route="home">URBAN GRIND <span>CAFÉ</span></a>
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="#home" data-route="home">Home</a></li>
-        <li><a href="#about" data-route="about">About</a></li>
-        <li><a href="#menu" data-route="menu">Menu</a></li>
-        <li><a href="#contact" data-route="contact">Contact</a></li>
+        <li><a href="#home" class="nav-link" data-route="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-route="about">About</a></li>
+        <li><a href="#menu" class="nav-link" data-route="menu">Menu</a></li>
+        <li><a href="#contact" class="nav-link" data-route="contact">Contact</a></li>
         <li><a href="tel:0616235271" class="call-btn">📞 Call</a></li>
       </ul>
 
-      <div class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" role="button" tabindex="0">
+      <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks" type="button">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   </header>
 
@@ -580,10 +704,10 @@
     <section class="page hero active" data-page="home">
       <div class="container hero-card">
         <h1>Your Rivonia Coffee Corner.</h1>
-        <p>Welcome to Urban Grind Café. Where we provide the best coffee in Sandton, Johannesburg.</p>
+        <p>Welcome to Urban Grind Café, where beautifully crafted drinks, warm interiors, and smooth browsing come together in one polished café experience.</p>
         <div class="btn-row">
-          <button class="btn btn-primary" data-route="menu">Explore Menu</button>
-          <button class="btn btn-light" data-route="contact">Find Us</button>
+          <button class="btn btn-primary" type="button" data-route="menu">View Menu</button>
+          <button class="btn btn-light" type="button" data-route="contact">Find Us</button>
         </div>
       </div>
     </section>
@@ -592,18 +716,18 @@
       <div class="container">
         <div class="section-head">
           <h2>The Urban Grind Story</h2>
-          <p>Built around warmth, comfort, and expertly crafted drinks for busy mornings and slow afternoons in Rivonia.</p>
+          <p>Built around warmth, comfort, and expertly crafted drinks for busy mornings and relaxed afternoons in Rivonia.</p>
         </div>
 
         <div class="about-grid">
           <div class="panel about-copy">
-            <h3>Great coffee. Smooth browsing. Better presentation.</h3>
-            <p>Urban Grind Café is designed to feel refined and welcoming, both in person and online. This version of the site uses page-style navigation rather than scroll jumps, so visitors feel like they are moving from page to page.</p>
-            <p>Each menu item opens into its own dedicated drink view, and images are protected with a stronger fallback system so broken filenames do not leave blank placeholders.</p>
-            <p>The contact page now includes the address and an embedded map so visitors can see exactly where the café is located.</p>
-            <div class="detail-actions" style="margin-top:20px;">
-              <button class="btn btn-primary" data-route="menu">Open Menu</button>
-              <button class="btn btn-light" data-route="contact">See Location</button>
+            <h3>Great coffee. Cleaner navigation. Better interaction.</h3>
+            <p>This rebuild fixes the page routing so buttons and menu links always move visitors directly to the correct page instead of feeling stuck.</p>
+            <p>The menu experience is also improved: on desktop, cards flip on hover for a more premium interaction, while on touch devices the content stays readable and usable without hover.</p>
+            <p>Each drink still has a dedicated view page, but now the journey to get there is more intentional and reliable.</p>
+            <div class="about-actions" style="margin-top:20px;">
+              <button class="btn btn-primary" type="button" data-route="menu">Open Menu</button>
+              <button class="btn btn-light" type="button" data-route="contact">See Location</button>
             </div>
           </div>
 
@@ -618,7 +742,7 @@
       <div class="container">
         <div class="section-head">
           <h2>Our Grind. Your Fuel.</h2>
-          <p>Tap any drink to open its own page. Images now try local files first, then trusted backups, then a placeholder only as the last resort.</p>
+          <p>Desktop cards flip on hover. Mobile users get a stacked, touch-friendly layout. Use the View Drink button to open the full drink page.</p>
         </div>
         <div class="menu-grid" id="menuGrid"></div>
       </div>
@@ -632,7 +756,7 @@
           </div>
 
           <div class="panel detail-card">
-            <div class="crumb">Menu / Signature Drink</div>
+            <div class="crumb" id="detailCrumb">Menu / Signature Drink</div>
             <h2 id="detailName">Drink Name</h2>
             <p class="desc" id="detailDescription">Drink description</p>
 
@@ -649,7 +773,7 @@
 
             <div class="detail-actions">
               <a href="tel:0616235271" class="btn btn-primary">Call to Order</a>
-              <button class="btn btn-light" data-route="menu">Back to Menu</button>
+              <button class="btn btn-outline" type="button" data-route="menu">Back to Menu</button>
             </div>
           </div>
         </div>
@@ -660,13 +784,13 @@
       <div class="container">
         <div class="section-head">
           <h2>Fresh Grind, Fast.</h2>
-          <p>Ready to order? Reach Urban Grind Café directly, see the location, and use the map to find your way there.</p>
+          <p>Call, visit, or collect. Everything important is here, including the address and map.</p>
         </div>
 
         <div class="contact-grid">
           <div class="panel contact-card">
             <h3>Call, visit, or collect</h3>
-            <p>Everything important is here, including the location and map.</p>
+            <p>Reach Urban Grind Café directly and plan your stop with ease.</p>
 
             <div class="contact-list">
               <div><strong>Phone:</strong> 061 623 5271</div>
@@ -678,8 +802,8 @@
           </div>
 
           <div class="panel contact-card">
-            <h3>Location & Map</h3>
-            <p>Visitors can now view the address and map directly on the contact page instead of reading a general info block.</p>
+            <h3>Location &amp; Map</h3>
+            <p>Visitors can see exactly where the café is located instead of guessing from a generic info block.</p>
             <div class="map-wrap">
               <iframe
                 title="Urban Grind Café location map"
@@ -696,7 +820,7 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2023 Urban Grind Café, Rivonia. All Rights Reserved. Powered by TechnoSpeak.</p>
+      <p>&copy; 2026 Urban Grind Café, Rivonia. All rights reserved.</p>
     </div>
   </footer>
 
@@ -800,42 +924,51 @@
       }
     ];
 
-    const safeFallback = (label) =>
-      `https://placehold.co/1200x900/efe7de/6f4b3e?text=${encodeURIComponent(label)}`;
+    const pages = [...document.querySelectorAll('.page')];
+    const routeControls = [...document.querySelectorAll('[data-route]')];
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+    const menuGrid = document.getElementById('menuGrid');
+    const detailImage = document.getElementById('detailImage');
+    const detailName = document.getElementById('detailName');
+    const detailDescription = document.getElementById('detailDescription');
+    const detailSizes = document.getElementById('detailSizes');
+    const detailPrices = document.getElementById('detailPrices');
+    const detailCrumb = document.getElementById('detailCrumb');
+
+    const FALLBACK_LABEL_BG = 'efe7de';
+    const FALLBACK_LABEL_TEXT = '6f4b3e';
+
+    function safeFallback(label) {
+      return `https://placehold.co/1200x900/${FALLBACK_LABEL_BG}/${FALLBACK_LABEL_TEXT}?text=${encodeURIComponent(label)}`;
+    }
 
     function buildCandidateList(drink) {
       const candidates = [];
+      const folders = ['', './', 'images/', './images/', 'assets/', './assets/', 'menu/', './menu/'];
 
       drink.localImages.forEach((file) => {
-        candidates.push(file);
-        candidates.push(`./${file}`);
-        candidates.push(`images/${file}`);
-        candidates.push(`./images/${file}`);
-        candidates.push(`assets/${file}`);
-        candidates.push(`./assets/${file}`);
-        candidates.push(`menu/${file}`);
-        candidates.push(`./menu/${file}`);
+        folders.forEach((folder) => candidates.push(`${folder}${file}`));
       });
 
-      if (drink.remoteBackup) {
-        candidates.push(drink.remoteBackup);
-      }
-
+      if (drink.remoteBackup) candidates.push(drink.remoteBackup);
       candidates.push(safeFallback(drink.name));
+
       return [...new Set(candidates)];
     }
 
     function attachImageWithFallback(img, drink) {
       const candidates = buildCandidateList(drink);
-      let pointer = 0;
+      let index = 0;
 
       function tryNext() {
-        if (pointer >= candidates.length) {
+        if (index >= candidates.length) {
           img.onerror = null;
           return;
         }
-        img.src = candidates[pointer];
-        pointer += 1;
+
+        img.src = candidates[index];
+        index += 1;
       }
 
       img.alt = drink.name;
@@ -843,69 +976,49 @@
       tryNext();
     }
 
-    const menuGrid = document.getElementById('menuGrid');
-    const detailImage = document.getElementById('detailImage');
-    const detailName = document.getElementById('detailName');
-    const detailDescription = document.getElementById('detailDescription');
-    const detailSizes = document.getElementById('detailSizes');
-    const detailPrices = document.getElementById('detailPrices');
-
-    function makeDrinkCard(drink) {
-      const card = document.createElement('article');
-      card.className = 'drink-card';
-      card.tabIndex = 0;
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', `Open ${drink.name}`);
-
-      card.innerHTML = `
-        <div class="drink-image-wrap">
-          <img class="drink-image" alt="${drink.name}" loading="lazy">
-        </div>
-        <div class="drink-content">
-          <h3>${drink.name}</h3>
-          <p>Tap to open drink page</p>
-        </div>
-      `;
-
-      attachImageWithFallback(card.querySelector('.drink-image'), drink);
-
-      const openDrink = () => {
-        location.hash = `drink/${drink.slug}`;
-      };
-
-      card.addEventListener('click', openDrink);
-      card.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          openDrink();
-        }
-      });
-
-      return card;
+    function closeMobileNav() {
+      navLinks.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
     }
 
-    drinks.forEach((drink) => menuGrid.appendChild(makeDrinkCard(drink)));
+    function toggleMobileNav() {
+      const isOpen = navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+    }
 
-    const pages = document.querySelectorAll('.page');
-    const routeLinks = document.querySelectorAll('[data-route]');
-    const navLinks = document.getElementById('navLinks');
-    const hamburger = document.getElementById('hamburger');
+    function normalizeRoute(hashValue) {
+      const cleaned = (hashValue || '').replace(/^#/, '').trim();
+      return cleaned || 'home';
+    }
 
-    function setActivePage(name) {
+    function setActivePage(pageName) {
       pages.forEach((page) => {
-        page.classList.toggle('active', page.dataset.page === name);
+        page.classList.toggle('active', page.dataset.page === pageName);
       });
 
-      routeLinks.forEach((link) => {
-        const route = link.dataset.route;
-        link.classList.toggle('active-link', route === name && name !== 'drink');
+      routeControls.forEach((control) => {
+        const route = control.dataset.route;
+        control.classList.toggle('active-link', pageName !== 'drink' && route === pageName);
       });
 
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      closeMobileNav();
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    }
+
+    function goToRoute(route) {
+      const target = route && route.trim() ? route.trim() : 'home';
+      const nextHash = `#${target}`;
+
+      if (window.location.hash === nextHash) {
+        routeFromHash();
+      } else {
+        window.location.hash = target;
+      }
     }
 
     function renderDrink(slug) {
       const drink = drinks.find((item) => item.slug === slug) || drinks[0];
+      detailCrumb.textContent = `Menu / ${drink.name}`;
       detailName.textContent = drink.name;
       detailDescription.textContent = drink.description;
       detailSizes.textContent = drink.sizes;
@@ -915,44 +1028,86 @@
     }
 
     function routeFromHash() {
-      const raw = location.hash.replace(/^#/, '') || 'home';
+      const raw = normalizeRoute(window.location.hash);
       const parts = raw.split('/');
+      const validPages = ['home', 'about', 'menu', 'contact'];
 
       if (parts[0] === 'drink' && parts[1]) {
         renderDrink(parts[1]);
         return;
       }
 
-      const valid = ['home', 'about', 'menu', 'contact'];
-      const target = valid.includes(raw) ? raw : 'home';
-      setActivePage(target);
+      const page = validPages.includes(parts[0]) ? parts[0] : 'home';
+      setActivePage(page);
     }
 
-    routeLinks.forEach((item) => {
-      item.addEventListener('click', (event) => {
-        const route = item.dataset.route;
+    function createDrinkCard(drink) {
+      const card = document.createElement('article');
+      card.className = 'flip-card';
+      card.setAttribute('aria-label', drink.name);
+
+      card.innerHTML = `
+        <div class="flip-card-inner">
+          <div class="flip-card-face flip-card-front">
+            <div class="drink-image-wrap">
+              <img class="drink-image" alt="${drink.name}" loading="lazy">
+            </div>
+            <div class="drink-content">
+              <h3>${drink.name}</h3>
+              <p>Hover on desktop to flip and reveal quick details.</p>
+            </div>
+          </div>
+
+          <div class="flip-card-face flip-card-back">
+            <h3>${drink.name}</h3>
+            <p>${drink.description}</p>
+            <div class="meta">
+              <div><strong>Sizes:</strong> ${drink.sizes}</div>
+              <div><strong>Price:</strong> ${drink.prices}</div>
+            </div>
+            <div class="card-actions" style="justify-content:center;">
+              <button class="btn btn-primary" type="button" data-drink-slug="${drink.slug}">View Drink</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const image = card.querySelector('.drink-image');
+      const viewButton = card.querySelector('[data-drink-slug]');
+
+      attachImageWithFallback(image, drink);
+
+      viewButton.addEventListener('click', () => {
+        goToRoute(`drink/${drink.slug}`);
+      });
+
+      return card;
+    }
+
+    drinks.forEach((drink) => {
+      menuGrid.appendChild(createDrinkCard(drink));
+    });
+
+    routeControls.forEach((control) => {
+      control.addEventListener('click', (event) => {
+        const route = control.dataset.route;
         if (!route) return;
         event.preventDefault();
-        location.hash = route;
-        navLinks.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
+        goToRoute(route);
       });
     });
 
-    function toggleMenu() {
-      const open = navLinks.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', String(open));
-    }
+    hamburger.addEventListener('click', toggleMobileNav);
 
-    hamburger.addEventListener('click', toggleMenu);
-    hamburger.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggleMenu();
+    window.addEventListener('hashchange', routeFromHash);
+    window.addEventListener('load', routeFromHash);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMobileNav();
       }
     });
 
-    window.addEventListener('hashchange', routeFromHash);
     routeFromHash();
   </script>
 </body>
